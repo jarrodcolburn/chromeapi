@@ -1,11 +1,11 @@
 // File interop with javascript functionality exposed by chrome extensions.
-@JS()
+@JS('chrome')
 library chromeapi;
 
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' show promiseToFuture;
 
-@JS('chrome.tabs')
+@JS('tabs')
 @staticInterop
 class Tabs {
   /// https://developer.chrome.com/docs/extensions/reference/tabs/#method-query
