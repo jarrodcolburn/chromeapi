@@ -5,13 +5,15 @@ library chromeapi;
 import 'package:js/js.dart';
 import 'package:js/js_util.dart' show promiseToFuture;
 
-/// Calls invoke JavaScript `chrome.tabs.query(obj)`. See documentation at
-/// https://developer.chrome.com/docs/extensions/reference/tabs/#method-query
-@JS('chrome.tabs.query')
-external dynamic _query(QueryInfo queryInfo, [Function? callback]);
+@JS('chrome.tabs')
+@staticInterop
+class Tabs {
+  /// https://developer.chrome.com/docs/extensions/reference/tabs/#method-query
+  external static dynamic query(QueryInfo queryInfo, [Function? callback]);
+}
 
 Future<List<Tab?>> query(QueryInfo queryInfo) async {
-  final response = await promiseToFuture(_query(queryInfo));
+  final response = await promiseToFuture(Tabs.query(queryInfo));
   if (response is List) return response.cast<Tab?>();
   return (response is Tab) ? [response] : <Tab>[];
 }
