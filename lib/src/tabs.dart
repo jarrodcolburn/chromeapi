@@ -1,8 +1,28 @@
 library tabs;
 
-import 'dart:js_util' show promiseToFuture;
+// import 'dart:js';
+// import 'dart:js_util';
+import 'dart:html_common';
+
+import 'package:js/js.dart';
+import 'package:js/js_util.dart';
 import 'tabs/types.dart';
 import 'tabs/methods.dart' as _tabs;
+
+extension _Dartify on Object {
+  Future<List<T>> toFutureList<T>() async {
+    if (!isJavaScriptPromise(this)) {
+      throw Exception(
+          'Promise return type expected but received instead: $this');
+    }
+    final result = await promiseToFuture(this);
+    if (result is List) return result.cast<T>();
+    if (result == null) return <T>[];
+    if (result is T) return <T>[result];
+    throw Exception(
+        'List of type ${T.toString()} could not be resolved as $this');
+  }
+}
 
 Future<List<T?>> _promiseToFutureList<T>(dynamic response) =>
     promiseToFuture(response).then((result) {
@@ -34,5 +54,7 @@ Future getSelected(int? windowId) => throw Exception(
 
 Future<num> getZoom(int? tabId) => promiseToFuture<num>(_tabs.getZoom(tabId));
 
+// Future<List<Tab?>> query(QueryInfo queryInfo) => _promiseToFutureList<Tab>(_tabs.query(queryInfo));
 Future<List<Tab?>> query(QueryInfo queryInfo) =>
-    _promiseToFutureList<Tab>(_tabs.query(queryInfo));
+    _tabs.query(queryInfo)?.toFutureList<Tab>() ??
+    (throw Exception('`tabs.query` did not return a promise'));
