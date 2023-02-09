@@ -1,136 +1,38 @@
-// File interop with javascript functionality exposed by chrome extensions.
-@JS('chrome')
-library chromeapi;
+library tabs;
 
-import 'package:js/js.dart';
-import 'package:js/js_util.dart' show promiseToFuture;
+import 'dart:js_util' show promiseToFuture;
+import 'tabs/types.dart';
+import 'tabs/methods.dart' as _tabs;
 
-@JS('tabs')
-@staticInterop
-class Tabs {
-  /// https://developer.chrome.com/docs/extensions/reference/tabs/#method-query
-  external static dynamic query(QueryInfo queryInfo, [Function? callback]);
-}
+Future<List<T?>> _promiseToFutureList<T>(dynamic response) =>
+    promiseToFuture(response).then((result) {
+      if (result is List) return result.cast<T?>();
+      if (result == null) return <T>[];
+      if (result is T) return <T>[result];
+      throw Exception('Promise return type not expected');
+    });
 
-Future<List<Tab?>> query(QueryInfo queryInfo) async {
-  final response = await promiseToFuture(Tabs.query(queryInfo));
-  if (response is List) return response.cast<Tab?>();
-  return (response is Tab) ? [response] : <Tab>[];
-}
+Future<Tab?> duplicate(int tabId) =>
+    promiseToFuture<Tab?>(_tabs.duplicate(tabId));
 
-/// https://developer.chrome.com/docs/extensions/reference/tabs/#type-TabStatus
-/// `unloaded`,`loading`,`complete`
-typedef TabStatus = String;
+Future<List> executeScript(int tabId, InjectionDetails details) =>
+    _promiseToFutureList(_tabs.executeScript(tabId, details));
 
-// https://developer.chrome.com/docs/extensions/reference/tabs/#type-WindowType
-/// `normal`,`popup`,`panel`,`app`,`devtools`
-typedef WindowId = num;
+Future<Tab?> get(int tabId) => promiseToFuture<Tab?>(_tabs.get(tabId));
 
-/// https://developer.chrome.com/docs/extensions/reference/tabs/#type-MutedInfoReason
-/// `user`,`capture`,`extension`
-typedef MutedInfoReason = String;
+@Deprecated(
+    'getAllInWindow` is deprecated. Please use `tabs.query({windowId: windowId})`')
+Future getAllInWindow(int? windowId) => throw Exception(
+    'getAllInWindow` is deprecated. Please use `tabs.query({windowId: windowId})`');
 
-/// String | String[]
-typedef Url = dynamic;
+Future<Tab?> getCurrent() => promiseToFuture<Tab?>(_tabs.getCurrent());
 
-@JS()
-@anonymous
-class QueryInfo {
-  external bool? get active;
-  external bool? get audible;
-  external bool? get autoDiscardable;
-  external bool? get currentWindow;
-  external bool? get discarded;
-  external num? get groupId;
-  external bool? get highlighted;
-  external num? get index;
-  external bool? get lastFocusedWindow;
-  external bool? get muted;
-  external bool? get pinned;
-  external TabStatus? get status;
-  external String? get title;
-  external String? get url;
-  external num? get windowId;
-  external WindowId? get windowType;
-  external factory QueryInfo({
-    bool? active,
-    bool? audible,
-    bool? autoDiscardable,
-    bool? currentWindow,
-    bool? discarded,
-    num? groupId,
-    bool? highlighted,
-    num? index,
-    bool? lastFocusedWindow,
-    bool? muted,
-    bool? pinned,
-    TabStatus? status,
-    String? title,
-    Url? url,
-    WindowId? windowId,
-    WindowId? windowType,
-  });
-}
+@Deprecated(
+    "`getSelected` is deprecated. Please use `tabs.query({active: true})`")
+Future getSelected(int? windowId) => throw Exception(
+    "`getSelected` is deprecated. Please use `tabs.query({active: true})`");
 
-/// JavaScript object(s) returned from `chrome.tabs.query`
-@JS()
-@anonymous
-class Tab {
-  external bool? get audible;
-  external bool? get autoDiscardable;
-  external bool? get discarded;
-  external String? get favIconUrl;
-  external num? get groupId;
-  external num? get height;
-  external bool? get highlighted;
-  external num? get id;
-  external bool get icognito;
-  external num get index;
-  external num get mutedInfo;
-  external num get openerTabId;
-  external String? get pendingUrl;
-  external bool? get pinned;
-  external String? get sessionId;
-  external TabStatus? get status;
-  external String? get title;
-  external String? get url;
-  external num? get width;
-  external num? get windowId;
+Future<num> getZoom(int? tabId) => promiseToFuture<num>(_tabs.getZoom(tabId));
 
-  external factory Tab({
-    bool? audible,
-    bool? autoDiscardable,
-    bool? discarded,
-    String? favIconUrl,
-    num? groupId,
-    num? height,
-    bool? highlighted,
-    num? id,
-    bool incognito,
-    num index,
-    MutedInfo? mutedInfo,
-    num openerTabId,
-    String? pendingUrl,
-    bool? pinned,
-    String? sessionId,
-    TabStatus? status,
-    String? title,
-    String? url,
-    num? width,
-    num? windowId,
-  });
-}
-
-/// https://developer.chrome.com/docs/extensions/reference/tabs/#type-MutedInfo
-@JS()
-@anonymous
-class MutedInfo {
-  external String? get extensionId;
-  external bool? get muted;
-  external MutedInfoReason? get reason;
-  external factory MutedInfo({
-    String? extensionId,
-    bool? muted,
-    MutedInfoReason? reason,
-  });
-}
+Future<List<Tab?>> query(QueryInfo queryInfo) =>
+    _promiseToFutureList<Tab>(_tabs.query(queryInfo));
