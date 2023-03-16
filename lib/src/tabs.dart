@@ -6,8 +6,8 @@ import 'dart:html_common';
 
 import 'package:js/js.dart';
 import 'package:js/js_util.dart';
-import 'tabs/types.dart';
-import 'tabs/methods.dart' as _tabs;
+import '_legacy_tabs/types.dart';
+import '_legacy_tabs/methods.dart' as _tabs;
 
 extension _Dartify on Object {
   Future<List<T>> toFutureList<T>() async {
