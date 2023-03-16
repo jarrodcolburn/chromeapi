@@ -2,6 +2,7 @@
 library;
 
 import 'package:js/js.dart';
+import '../tabs/methods.dart';
 
 part 'errors.dart';
 part 'events.dart';

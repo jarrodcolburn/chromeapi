@@ -1,5 +1,6 @@
 @JS()
 library chorome.windows;
+import '../tabs/methods.dart';
 
 import 'package:js/js.dart';
 part 'types.dart';
