@@ -19,7 +19,7 @@ class Tabs {
   external Tab? duplicate(int tabId);
   external List executeScript(int tabId, InjectionDetails details);
   external Tab? get(int tabId, [_]);
-  external Tab? getCurrent();
+  external Future<Tab?> getCurrent();
   external List<Tab> query(QueryInfo queryInfo, [_]);
   external void remove(int tabId, [_]);
 }

@@ -9,6 +9,8 @@ import 'src/tabs/methods.dart';
 import 'src/web_navigation/methods.dart';
 import 'src/windows/methods.dart';
 
+export 'src/tabs/methods.dart';
+
 @JS()
 external Chrome get chrome;
 
