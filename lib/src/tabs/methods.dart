@@ -9,14 +9,17 @@ part 'events.dart';
 part 'misc.dart';
 part 'types.dart';
 
+/// chrome.tabs APIs
+/// https://developer.chrome.com/docs/extensions/reference/tabs
+
 @JS()
 @anonymous
 class Tabs {
-  external dynamic create(TabInfo tabInfo, void Function(Tab) callback);
-  external duplicate(int tabId);
-  external executeScript(int tabId, InjectionDetails details);
+  external Tab create(TabInfo tabInfo, [_]);
+  external Tab? duplicate(int tabId);
+  external List executeScript(int tabId, InjectionDetails details);
   external Tab? get(int tabId, [_]);
-  external getCurrent();
-  external List<Tab?> query(QueryInfo queryInfo, [_]);
+  external Tab? getCurrent();
+  external List<Tab> query(QueryInfo queryInfo, [_]);
   external void remove(int tabId, [_]);
 }

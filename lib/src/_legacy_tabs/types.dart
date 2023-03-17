@@ -4,8 +4,6 @@
 
 // import 'package:js/js.dart' show JS, anonymous;
 
-
-
 // /// JavaScript object(s) returned from `chrome.tabs.query`
 // @JS()
 // @anonymous
