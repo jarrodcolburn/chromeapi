@@ -22,7 +22,10 @@ class _QRViewState extends State<QRView> {
   updateQRwithURL() async {
     Tab? tab = await chrome.tabs.getCurrent();
     String? url = tab?.url;
+    print('asdfasdfasdfdasfasdfasdfafd');
     if (url != null && url.isNotEmpty) {
+      print('asdfasdfasdfdasfasdfasdfafd2');
+      print(url);
       setState(() {
         _textController.text = url;
         qrText = url;
