@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Tab;
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:chromeapi/chromeapi.dart';
+import 'package:chromeapi/chrome.dart';
 
 import 'color_list.dart';
 
@@ -19,28 +19,22 @@ class _QRViewState extends State<QRView> {
   int qrColorIndex = 0;
   int qrBackgroundColorIndex = 0;
 
+  updateQRwithURL() async {
+    Tab? tab = await chrome.tabs.getCurrent();
+    String? url = tab?.url;
+    if (url != null && url.isNotEmpty) {
+      setState(() {
+        _textController.text = url;
+        qrText = url;
+        _enabled = false;
+      });
+    }
+  }
+
   @override
   void initState() {
     _textController = TextEditingController(text: qrText);
     _textFocus = FocusNode();
-    query(QueryInfo(active: true, currentWindow: true, highlighted: true))
-        .then((value) {
-      int i = 0;
-      for (final tab in value) {
-        final url = tab?.url;
-        print('attempt $i');
-        i++;
-        print('url is $url');
-        if (url != null && url.isNotEmpty) {
-          setState(() {
-            _textController.text = url;
-            qrText = url;
-            _enabled = false;
-          });
-          break;
-        }
-      }
-    });
     super.initState();
   }
 
