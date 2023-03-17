@@ -2,9 +2,6 @@
 library chorome.tabs;
 
 import 'dart:async';
-import 'dart:core';
-import 'dart:core';
-import 'dart:html_common';
 
 import 'package:js/js.dart';
 
