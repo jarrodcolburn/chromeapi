@@ -1,7 +1,8 @@
-@JS()
-import 'package:js/js.dart';
-import 'misc.dart';
-import 'types.dart' show Tab;
+part of 'methods.dart';
+
+// import 'package:js/js.dart';
+// import 'misc.dart';
+// import 'types.dart' show Tab;
 
 external void onActivated(void Function(ActiveInfo activeInfo) callback);
 

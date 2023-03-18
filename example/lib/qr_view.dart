@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' hide Tab;
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:chromeapi/chrome.dart';
-
+import 'package:chromeapi/tabs.dart';
 import 'color_list.dart';
 
 class QRView extends StatefulWidget {
@@ -20,8 +19,11 @@ class _QRViewState extends State<QRView> {
   int qrBackgroundColorIndex = 0;
 
   updateQRwithURL() async {
-    Tab? tab = await chrome.tabs.getCurrent();
-    String? url = tab?.url;
+    final queryInfo =
+        QueryInfo(active: true, currentWindow: true, highlighted: true);
+    String url = (await query(queryInfo))
+        .singleWhere((element) => element.url != null)
+        .url!;
     print('asdfasdfasdfdasfasdfasdfafd');
     if (url != null && url.isNotEmpty) {
       print('asdfasdfasdfdasfasdfasdfafd2');
@@ -38,6 +40,7 @@ class _QRViewState extends State<QRView> {
   void initState() {
     _textController = TextEditingController(text: qrText);
     _textFocus = FocusNode();
+    updateQRwithURL();
     super.initState();
   }
 

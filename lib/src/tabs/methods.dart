@@ -1,10 +1,10 @@
 @JS('chrome.tabs')
-// library chrome.tabs;
+library chrome.tabs;
 
 import 'package:js/js.dart';
-
 import 'misc.dart';
-import 'types.dart' show ZoomSettings;
+import 'types.dart' show ZoomSettings, Tab;
+part 'events.dart';
 // import 'types.dart';
 
 // part 'events.dart';

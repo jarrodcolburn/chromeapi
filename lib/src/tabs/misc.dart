@@ -53,6 +53,8 @@ class CreateProperties {
   external String? get windowId;
 }
 
+@JS()
+@anonymous
 class HighlightInfo {
   external factory HighlightInfo({int? windowId, List<int>? tabs});
   external List<int>? get tabs;
@@ -89,12 +91,16 @@ class InjectionDetails {
   external RunAt? get runAt;
 }
 
+@JS()
+@anonymous
 class MoveProperties {
   external factory MoveProperties({int? index, int? windowId});
   external int? get index;
   external int? get windowId;
 }
 
+@JS()
+@anonymous
 class Options {
   external factory Options(
       {CreateProperties? createProperties, int? groupId, List<int>? tabIds});
@@ -142,6 +148,8 @@ class QueryInfo {
   external WindowType? get windowType;
 }
 
+@JS()
+@anonymous
 class ReloadProperties {
   external bool? bypassCache;
   external factory ReloadProperties({bool? bypassCache});
@@ -193,6 +201,8 @@ class AttachInfo {
   external int get newPosition;
 }
 
+@JS()
+@anonymous
 class DetachInfo {
   external factory DetachInfo({int? oldWindowId, int oldPosition});
   external int get oldWindowId;
