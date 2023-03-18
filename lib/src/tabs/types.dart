@@ -83,6 +83,8 @@ typedef ZoomSettingsMode = String;
 /// `per-origin`,`per-tab`
 typedef ZoomSettingsScope = String;
 
+@JS()
+@anonymous
 class ZoomSettings {
   external int? get defaultZoomFactor;
   external ZoomSettingsMode? get mode;
