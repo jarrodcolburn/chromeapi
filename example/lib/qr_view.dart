@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart' hide Tab;
 import 'package:qr_flutter/qr_flutter.dart';
+<<<<<<< HEAD
 import 'package:chromeapi/tabs.dart';
+=======
+
+>>>>>>> main
 import 'color_list.dart';
 
 class QRView extends StatefulWidget {
-  const QRView({Key? key}) : super(key: key);
+  final String? qrText;
+  final bool enabled;
+  const QRView({Key? key, this.qrText, this.enabled = false}) : super(key: key);
 
   @override
   State<QRView> createState() => _QRViewState();
@@ -13,11 +19,12 @@ class QRView extends StatefulWidget {
 class _QRViewState extends State<QRView> {
   late final TextEditingController _textController;
   late final FocusNode _textFocus;
-  bool _enabled = true;
+  bool _enabled = false;
   String qrText = '';
   int qrColorIndex = 0;
   int qrBackgroundColorIndex = 0;
 
+<<<<<<< HEAD
   updateQRwithURL() async {
     final queryInfo =
         QueryInfo(active: true, currentWindow: true, highlighted: true);
@@ -41,6 +48,16 @@ class _QRViewState extends State<QRView> {
     _textController = TextEditingController(text: qrText);
     _textFocus = FocusNode();
     updateQRwithURL();
+=======
+  @override
+  void initState() {
+    setState(() {
+      _enabled = widget.enabled;
+      qrText = widget.qrText ?? '';
+      _textController = TextEditingController(text: qrText);
+      _textFocus = FocusNode();
+    });
+>>>>>>> main
     super.initState();
   }
 

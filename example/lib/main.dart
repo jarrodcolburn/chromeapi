@@ -1,8 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:chromeapi/tabs.dart';
+import 'package:flutter/material.dart' hide Tab;
 
 import 'qr_view.dart';
 
 void main() => runApp(const MyApp());
+
+Future<Tab> getActiveTab() async {
+  QueryInfo queryInfo = QueryInfo(active: true, lastFocusedWindow: true);
+  List<Tab> tabs = await query(queryInfo);
+  final tab = tabs.singleWhere((tab) => tab.url != null && tab.url!.isNotEmpty);
+  return tab;
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,10 +20,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Chrome Extension',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: FutureBuilder<Tab>(
+        future: getActiveTab(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return QRView(qrText: snapshot.data!.url!);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
-      home: const QRView(),
     );
   }
 }
