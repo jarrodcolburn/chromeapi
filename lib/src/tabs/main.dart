@@ -1,63 +1,87 @@
 import 'package:chromeapi/src/tabs/misc.dart';
 
+import 'dart:async' show Completer;
 import '../_promise_converters.dart';
-import 'methods.dart' as tabs;
+import 'methods.dart' as methods;
+import 'events.dart' as events;
 import 'types.dart';
+import 'temp.dart';
+
+// TODO: Implement executeScript! in `scripting` is deprecated in tabs.
+/// List of items that are deprecated in `tabs`
+/// Deprecated mehtods:
+/// * `executeScript`
+/// * `getAllInWindow`
+/// * `getSelected`
+/// * `insertCSS`
+/// * `removeCSS`
+/// * `sendMessage`
+/// Deprecated events:
+/// * `onActiveChanged`
+/// * `onHighlightChanged`
+
+Future<String> captureVisibleTab([int? windowId, ImageDetails? options]) =>
+    methods.captureVisibleTab(windowId, options).toFuture<String>();
+
+Future<Port> connect(int tabId, [ConnectInfo? connectInfo]) =>
+    methods.connect(tabId, connectInfo).toFuture<Port>();
 
 Future<Tab> create(CreateProperties tabInfo) =>
-    tabs.create(tabInfo).toFuture<Tab>();
+    methods.create(tabInfo).toFuture<Tab>();
 
-Future<Tab?> duplicate(int tabId) => tabs.duplicate(tabId).toFuture<Tab?>();
+Future<List<Tab>> discard([int? tabId]) =>
+    methods.discard(tabId).toFutureList<Tab>();
 
-// TODO: Implement executeScript!
-@Deprecated('Use executeScript instead')
-Future<List> executeScript() => throw Exception('Use executeScript instead');
+Future<String> detectLanguage([int? tabId]) =>
+    methods.detectLanguage(tabId).toFuture<String>();
+Future<Tab?> duplicate(int tabId) => methods.duplicate(tabId).toFuture<Tab?>();
 
-Future<Tab?> get(int tabId) => tabs.get(tabId).toFuture<Tab?>();
+Future<Tab?> get(int tabId) => methods.get(tabId).toFuture<Tab?>();
 
-Future<Tab?> getCurrent() => tabs.getCurrent().toFuture<Tab?>();
+Future<Tab?> getCurrent() => methods.getCurrent().toFuture<Tab?>();
+
+Future<int> getZoom([int? tabId]) => methods.getZoom(tabId).toFuture<int>();
+
+Future<ZoomSettings> getZoomSettings([int? tabId]) =>
+    methods.getZoomSettings(tabId).toFuture<ZoomSettings>();
+
+Future<void> goBack([int? tabId]) => methods.goBack(tabId).toFuture<void>();
+
+Future<void> goForward([int? tabId]) =>
+    methods.goForward(tabId).toFuture<void>();
+
+Future<int> group(Options? groupOptions) =>
+    methods.group(groupOptions).toFuture<int>();
+
+Future<void> highlight(HighlightInfo highlightInfo) =>
+    methods.highlight(highlightInfo).toFuture<void>();
+
+Future<Tab> move(int tabId, MoveProperties moveProperties) =>
+    methods.move(tabId, moveProperties).toFuture<Tab>();
 
 Future<List<Tab>> query(QueryInfo queryInfo) =>
-    tabs.query(queryInfo).toFutureList<Tab>();
+    methods.query(queryInfo).toFutureList<Tab>();
 
-Future<int> getZoom(int? tabId) => tabs.getZoom(tabId).toFuture<int>();
-// // Expose events as streams instead of relying on callbacks.
-// Stream<_ActivatedEvent> get onActivated async* {
-//   while (true) {
-//     final completer = Completer<_ActivatedEvent>();
-//     void callback(ActiveInfo activeInfo) {
-//       _ActivatedEvent activatedEvent = _ActivatedEvent._(
-//         activeInfo: activeInfo,
-//       );
-//       completer.complete(activatedEvent);
-//     }
+Future<void> reload([int? tabId, ReloadProperties? reloadProperties]) =>
+    methods.reload(tabId, reloadProperties).toFuture<void>();
 
-//     tabs.onActivated(callback);
-//     yield await completer.future;
-//   }
-// }
+Future<void> remove(List<int> tabIds) =>
+    methods.remove(tabIds).toFuture<void>();
 
-// Stream<_RemovedEvent> get onRemoved async* {
-//   while (true) {
-//     final completer = Completer<_RemovedEvent>();
-//     void callback(int tabId, RemoveInfo info) {
-//       _RemovedEvent removedEvent = _RemovedEvent._(tabId: tabId, info: info);
-//       completer.complete(removedEvent);
-//     }
+typedef JSONstring = String;
+Future<JSONstring> sendMessage(int tabId, String message,
+        [SendMessageOptions? options]) =>
+    methods.sendMessage(tabId, message, options).toFuture<JSONstring>();
+Future<void> setZoom(int? tabId, double zoomFactor) =>
+    methods.setZoom(tabId, zoomFactor).toFuture<void>();
+Future<void> setZoomSettings(int? tabId, ZoomSettings zoomSettings) =>
+    methods.setZoomSettings(tabId, zoomSettings).toFuture<void>();
+Future<void> ungroup(List<int> tabIds) =>
+    methods.ungroup(tabIds).toFuture<void>();
 
-//     tabs.onRemoved(callback);
-//     yield await completer.future;
-//   }
-// }
-// // Events classes will be implemented as Record classes in future release.
-// // Prefixed with `_` to discourage extension of classes in short term.
-// class _ActivatedEvent {
-//   final ActiveInfo activeInfo;
-//   _ActivatedEvent._({required this.activeInfo});
-// }
+Future<List<Tab>> update(int tabId, UpdateProperties updateProperties) =>
+    methods.update(tabId, updateProperties).toFutureList<Tab>();
 
-// class _RemovedEvent {
-//   final int tabId;
-//   final RemoveInfo info;
-//   _RemovedEvent._({required this.tabId, required this.info});
-// }
+Stream get onActivated => events.onActivated.toStream((Completer completer) {
+      return (a) => completer.complete(a);
+    });
