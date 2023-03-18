@@ -6,23 +6,23 @@
 // import 'src/runtime/methods.dart';
 // import 'src/storage/methods.dart';
 // import 'src/tabs/methods.dart';
-import 'src/tabs/main.dart';
+// import 'src/tabs/main.dart';
 // import 'src/web_navigation/methods.dart';
 // import 'src/windows/methods.dart';
 
-export 'src/tabs/methods.dart';
+export 'src/tabs/main.dart';
 
-Chrome get chrome => Chrome();
+// Chrome get chrome => Chrome();
 
-class Chrome {
-  static final Chrome _singleton = Chrome._internal();
+// class Chrome {
+//   static final Chrome _singleton = Chrome._internal();
 
-  factory Chrome() {
-    return _singleton;
-  }
-  Tabs get tabs => Tabs();
-  Chrome._internal();
-}
+//   factory Chrome() {
+//     return _singleton;
+//   }
+//   Tabs get tabs => Tabs();
+//   Chrome._internal();
+// }
 
 
 // @JS()

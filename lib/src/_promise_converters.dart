@@ -1,3 +1,5 @@
+// Collection of helper that convert JS promises to Dart futures
+// and do some type checking
 import 'dart:html_common';
 
 extension Dartify on Object {

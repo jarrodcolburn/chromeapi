@@ -30,7 +30,6 @@
 // Future getSelected(int? windowId) => throw Exception(
 //     "`getSelected` is deprecated. Please use `tabs.query({active: true})`");
 
-// Future<num> getZoom(int? tabId) => promiseToFuture<num>(_tabs.getZoom(tabId));
 
 // // Future<List<Tab?>> query(QueryInfo queryInfo) => _promiseToFutureList<Tab>(_tabs.query(queryInfo));
 // Future<List<Tab?>> query(QueryInfo queryInfo) =>

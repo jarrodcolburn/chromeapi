@@ -1,5 +1,6 @@
 @JS()
-part of "methods.dart";
+
+import 'package:js/js.dart';
 
 /// https://developer.chrome.com/docs/extensions/reference/extensionTypes/#type-RunAt
 /// `document_start`,`document_end`,`document_idle`
@@ -15,9 +16,20 @@ typedef Url = dynamic;
 
 @JS()
 @anonymous
-class ActiveInfo {
-  external int get tabId;
-  external int get windowId;
+class CreateProperties {
+  external factory CreateProperties(
+      {bool? active,
+      int index,
+      int? openerTabId,
+      bool? pinned,
+      String? url,
+      String? windowId});
+  external bool? get active;
+  external int? get index;
+  external int? get openerTabId;
+  external bool? get pinned;
+  external String? get url;
+  external String? get windowId;
 }
 
 @JS()
@@ -79,13 +91,3 @@ class QueryInfo {
   external num? get windowId;
   external WindowType? get windowType;
 }
-
-@JS()
-@anonymous
-class TabInfo {
-  external factory TabInfo({bool? active, bool? pinned, String? url});
-  external bool? get active;
-  external bool? get pinned;
-  external String? get url;
-}
-

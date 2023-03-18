@@ -1,5 +1,8 @@
 @JS()
-part of "methods.dart";
+import 'dart:html';
+
+import 'package:js/js.dart';
+// part of "methods.dart";
 
 /// https://developer.chrome.com/docs/extensions/reference/tabs/#type-MutedInfoReason
 /// `user`,`capture`,`extension`
@@ -72,4 +75,21 @@ class Tab {
   external num? get width;
 
   external num? get windowId;
+}
+
+/// `automatic`,`manual`,`disabled`
+typedef ZoomSettingsMode = String;
+
+/// `per-origin`,`per-tab`
+typedef ZoomSettingsScope = String;
+
+class ZoomSettings {
+  external int? get defaultZoomFactor;
+  external ZoomSettingsMode? get mode;
+  external ZoomSettingsScope? get scope;
+  external factory ZoomSettings({
+    int? defaultZoomFactor,
+    ZoomSettingsMode? mode,
+    ZoomSettingsScope? scope,
+  });
 }
