@@ -2,5 +2,5 @@
     "image": "mcr.microsoft.com/devcontainers/javascript-node:0-18",
     "features": {
         "ghcr.io/jarrodcolburn/features/flutter-sdk:0": {}
-    }
+    },"onCreateCommand": "npm install -g puppeteer"
 }
