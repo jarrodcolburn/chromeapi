@@ -1,5 +1,4 @@
 @JS()
-import 'dart:html';
 
 import 'package:js/js.dart';
 // part of "methods.dart";

@@ -1,5 +1,3 @@
-import 'package:js/js.dart';
-
 @JS()
 import 'package:js/js.dart';
 // this is a temporary file
