@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 6.1.5">
+  <meta name="description" content="chromeapi API docs, for the Dart programming language.">
+  <title>chromeapi - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li class="self-crumb">chromeapi package</li>
+  </ol>
+  <div class="self-name">chromeapi</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span class="material-symbols-outlined">
+        brightness_4
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p>Chrome Extensions API</p>
+<h2 id="features">Features</h2>
+<p>Project is WIP, starting with <code>chrome.tabs</code> mostly implemented (methods, not events).</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Set permissions in <code>manifest.json</code> required to use specifc API's according found at <a href="https://developer.chrome.com/docs/extensions/reference">Chrome Reference</a></li>
+<li>If building with Flutter,
+<ul>
+<li>Make the appropriate changes to the normal working directory/files.
+<ul>
+<li>Examples:</li>
+</ul>
+<ul>
+<li><code>manifest.json</code> (example: service workers)</li>
+<li><code>index.json</code></li>
+</ul>
+</li>
+<li>Customize the build command <code>flutter build web --web-renderer html --csp</code>
+For reference on <a href="https://medium.com/flutter-community/building-a-chrome-extension-using-flutter-aeb100a6d6c">Building Chrome Extension using Flutter</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>Import the package.
+`import 'package:chromeapi/chromeapi.dart';</p>
+<p>Use the <code>chrome</code> object. Currently only <code>chrome.tabs</code> works.</p>
+<p>See example on getting the active tab.</p>
+<pre class="language-dart"><code class="language-dart">Future&lt;Tab&gt; getActiveTab() async {
+  QueryInfo queryInfo = QueryInfo(active: true, lastFocusedWindow: true);
+  List&lt;Tab&gt; tabs = await chrome.tabs.query(queryInfo);
+  final tab = tabs.singleWhere((tab) =&gt; tab.url != null &amp;&amp; tab.url!.isNotEmpty);
+  return tab;
+}
+</code></pre>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="chromeapi">
+  <span class="name"><a href="chromeapi/chromeapi-library.html">chromeapi</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+          <dt id="tabs">
+  <span class="name"><a href="tabs/tabs-library.html">tabs</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+  <li class="self-crumb">chromeapi package</li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">chromeapi</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="chromeapi/chromeapi-library.html">chromeapi</a></li>
+      <li><a href="tabs/tabs-library.html">tabs</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    chromeapi
+      0.0.7
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

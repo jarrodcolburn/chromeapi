@@ -17,19 +17,19 @@ Project is WIP, starting with `chrome.tabs` mostly implemented (methods, not eve
 For reference on [Building Chrome Extension using Flutter](https://medium.com/flutter-community/building-a-chrome-extension-using-flutter-aeb100a6d6c)
 
 ## Usage 
-Import the package.
-`import 'package:chromeapi/chromeapi.dart';
+Import the library, no use of js namespaces.
 
+So to get `chrome.tabs` import...
+`import 'package:chromeapi/tabs.dart';
 
-Use the `chrome` object. Currently only `chrome.tabs` works.
-
-See example on getting the active tab.
+and as an example on getting the active tab, use `query`...
 
 ```dart
 Future<Tab> getActiveTab() async {
   QueryInfo queryInfo = QueryInfo(active: true, lastFocusedWindow: true);
-  List<Tab> tabs = await chrome.tabs.query(queryInfo);
-  final tab = tabs.singleWhere((tab) => tab.url != null && tab.url!.isNotEmpty);
-  return tab;
+  // Chrome library, not like JS namespaces
+  // `chrome.tabs.query` just `query` in this case
+  List<Tab> tabs = await query(queryInfo);
+  return tabs.singleWhere((tab) => tab.url != null && tab.url!.isNotEmpty);
 }
 ```
