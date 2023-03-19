@@ -1,19 +1,17 @@
-Put a short description of the package here that helps potential users know whether this package might be useful for them.
+Chrome Extensions API
 
-This package is a library containing ths JS interop packages to create Chrome Extensions
 
 ## Features
+ 
+Project is WIP, starting with `chrome.tabs` mostly implemented (methods, not events).
 
-Currently only portions of the `chrome.tabs` interface are implemented. And only the method `chrome.tabs.query` can run.
+## Prerequisites
 
-## Getting started
-
-The package was inspired by Flutter Chrome Extension repo that generates QR codes based on current tab. https://github.com/jarrodcolburn/flutter_qr_extension
-
-Packages works best with Flutter web with modified `index.html` and `manifest.json` with html rendered and csp flags.
-
-## Usage
-
-Package only working in Chrome extension.
-
-## Additional information
+* Set permissions in `manifest.json` required to use specifc API's according found at [Chrome Reference](https://developer.chrome.com/docs/extensions/reference)
+* If building with Flutter, 
+	* Make the appropriate changes to the normal working directory/files. 
+		- Examples: 
+		* `manifest.json` (example: service workers)
+		* `index.json`
+	*  Customize the build command `flutter build web --web-renderer html --csp`
+For reference on [Building Chrome Extension using Flutter](https://medium.com/flutter-community/building-a-chrome-extension-using-flutter-aeb100a6d6c)

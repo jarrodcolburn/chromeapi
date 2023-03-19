@@ -1,7 +1,7 @@
 name: chromeapi
 description: Chrome Extension API wrapper
-version: 0.0.4
-# repository: https://github.com/my_org/my_repo
+version: 0.0.7
+repository: https://github.com/jarrodcolburn/chromeapi
 
 environment:
   sdk: '>=2.19.4 <3.0.0'
