@@ -1,15 +1,13 @@
 import 'package:chromeapi/src/tabs/misc.dart';
 
-import 'dart:async' show Completer;
 import '../_promise_converters.dart';
 import 'methods.dart' as tabs;
 // import 'events.dart' as events;
 import 'types.dart';
 import 'temp.dart';
 
-// TODO: Implement executeScript! in `scripting` is deprecated in tabs.
 // List of items that are deprecated in `tabs`
-// Deprecated mehtods:
+// Deprecated methods:
 // * `executeScript`
 // * `getAllInWindow`
 // * `getSelected`

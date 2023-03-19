@@ -60,7 +60,7 @@ class Tab {
   external int? get groupId;
   external num? get height;
   external bool? get highlighted;
-  external bool get icognito;
+  external bool get incognito;
   external num? get id;
   external num get index;
   external num get mutedInfo;
