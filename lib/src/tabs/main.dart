@@ -8,17 +8,17 @@ import 'types.dart';
 import 'temp.dart';
 
 // TODO: Implement executeScript! in `scripting` is deprecated in tabs.
-/// List of items that are deprecated in `tabs`
-/// Deprecated mehtods:
-/// * `executeScript`
-/// * `getAllInWindow`
-/// * `getSelected`
-/// * `insertCSS`
-/// * `removeCSS`
-/// * `sendMessage`
-/// Deprecated events:
-/// * `onActiveChanged`
-/// * `onHighlightChanged`
+// List of items that are deprecated in `tabs`
+// Deprecated mehtods:
+// * `executeScript`
+// * `getAllInWindow`
+// * `getSelected`
+// * `insertCSS`
+// * `removeCSS`
+// * `sendMessage`
+// Deprecated events:
+// * `onActiveChanged`
+// * `onHighlightChanged`
 
 Future<String> captureVisibleTab([int? windowId, ImageDetails? options]) =>
     tabs.captureVisibleTab(windowId, options).toFuture<String>();
