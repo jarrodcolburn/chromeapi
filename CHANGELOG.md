@@ -1,3 +1,2 @@
-## 1.0.0
-
-- Initial version.
+## 0.0.7
+- Implement all methods of `chrome.tabs` as namespace
