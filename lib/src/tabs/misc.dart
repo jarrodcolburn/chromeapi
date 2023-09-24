@@ -1,6 +1,4 @@
 import 'package:js/js.dart';
-
-@JS()
 import "types.dart";
 
 /// https://developer.chrome.com/docs/extensions/reference/extensionTypes/#type-RunAt
