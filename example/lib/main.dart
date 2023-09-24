@@ -1,4 +1,4 @@
-import 'package:chromeapi/tabs.dart';
+import 'package:chromeapi/chromeapi.dart';
 import 'package:flutter/material.dart' hide Tab;
 
 import 'qr_view.dart';
@@ -7,7 +7,7 @@ void main() => runApp(const MyApp());
 
 Future<Tab> getActiveTab() async {
   QueryInfo queryInfo = QueryInfo(active: true, lastFocusedWindow: true);
-  List<Tab> tabs = await query(queryInfo);
+  List<Tab> tabs = await chrome.tabs.query(queryInfo);
   final tab = tabs.singleWhere((tab) => tab.url != null && tab.url!.isNotEmpty);
   return tab;
 }

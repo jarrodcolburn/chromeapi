@@ -1,8 +1,5 @@
-@JS()
-import 'dart:html';
 
 import 'package:js/js.dart';
-// part of "methods.dart";
 
 /// https://developer.chrome.com/docs/extensions/reference/tabs/#type-MutedInfoReason
 /// `user`,`capture`,`extension`
