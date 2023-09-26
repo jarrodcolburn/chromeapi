@@ -12,12 +12,29 @@ Future<Tab> getActiveTab() async {
   return tab;
 }
 
+final Map<String, Widget Function(BuildContext)> routes = {
+  'options': buildOptionsPage
+};
+
+Widget buildOptionsPage(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.red,
+    appBar: AppBar(
+      title: const Text('Options'),
+    ),
+    body: const Center(
+      child: Text('Options page'),
+    ),
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: routes,
       title: 'Flutter Chrome Extension',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),

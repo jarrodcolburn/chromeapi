@@ -8,6 +8,7 @@ import 'package:js/js.dart';
 import 'tabs/misc.dart';
 import 'tabs/types.dart' show ZoomSettings, Tab;
 import 'tabs/temp.dart';
+import 'tabs/eventhandler.dart';
 // part 'events.dart';
 
 // part 'events.dart';
@@ -132,93 +133,16 @@ extension TabsExt on Tabs {
   Future<List<Tab>> update(int tabId, UpdateProperties updateProperties) =>
       _update(tabId, updateProperties).toFutureList<Tab>();
 
-  // @JS('onActivated')
-  // external EventHandler get _onActivated;
-  // Stream get onActivated =>
-  //     _onActivated.toStream<Future<Event> Function(ActiveInfo)>(converter);
-}
-
-class Event {
-  final ActiveInfo activeInfo;
-  Event(this.activeInfo);
-}
-
-Future<Event> converter(ActiveInfo activeInfo) async {
-  return Event(activeInfo);
-}
-
-typedef callbackSig = void Function(ActiveInfo a);
-
-@JS()
-@staticInterop
-class EventHandler {}
-
-extension on EventHandler {
-  @JS('addListener')
-  external void _addListener(callbackSig f);
-  void addListener(callbackSig f) => _addListener(allowInterop(f));
-
-  Stream<ActiveInfo> toStream() {
-    final controller = StreamController<ActiveInfo>();
-
-    void callback(ActiveInfo event) async {
-      controller.add(event);
-    }
-
-    controller.onListen = () => addListener(callback);
-    // controller.onCancel = () => removeListener(jsCallback);
-    return controller.stream;
+  @JS('onActivated')
+  external ActiveEventHandler get _onActivated;
+  Stream<ActiveEvent> get onActivated {
+    final s = StreamController<ActiveEvent>()
+      ..setup(_onActivated, ActiveEvent._);
+    return s.stream;
   }
-  // dispatch
-  // hasListener
-  // hasListeners
 }
 
-// @JS()
-// @staticInterop
-// class ActivatedEventHandler {}
-
-// extension on ActivatedEventHandler {
-//   @JS('addListener')
-//   external void _addListener(void Function(ActiveInfo) callback);
-//   Stream<ActiveInfo> addListener() async* {
-//     Completer<ActiveInfo> completer = Completer<ActiveInfo>();
-//     void callback(ActiveInfo a) {
-//       completer.complete(a);
-//       completer = Completer<ActiveInfo>();
-//     }
-
-//     _addListener(allowInterop(callback));
-//     while (true) {
-//       yield (await completer.future);
-//     }
-//   }
-// }
-
-// class ActivatedEvent {}
-
-// @JS()
-// @staticInterop
-// class SingleEvent {}
-
-// // extension A<T, R extends ({T t,}), F extends R Function(T t)> on SingleEvent {
-// extension A<R extends Record, F extends Function> on SingleEvent {
-//   @JS('addListener')
-//   external void _addListener(F); // void Function(T) callback);
-//   @JS('removeListener')
-//   external void _removeListener(F); 
-
-//   Stream<R> toStream<R, F, T>(
-//       Future<ActivatedEvent> Function(F) converter) async* {
-//     Completer<R> completer = Completer<R>();
-//     void callback(T t) {
-//       // completer.complete((t,));
-//       completer = Completer<R>();
-//     }
-
-//     _addListener(allowInterop(callback));
-//     while (true) {
-//       yield (await completer.future);
-//     }
-//   }
-// }
+class ActiveEvent {
+  final ActiveInfo activeInfo;
+  ActiveEvent._(this.activeInfo);
+}

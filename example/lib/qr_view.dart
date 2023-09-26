@@ -47,6 +47,9 @@ class _QRViewState extends State<QRView> {
               child: QrImageView(
                 data: qrText,
                 padding: const EdgeInsets.all(16),
+                dataModuleStyle:
+                    QrDataModuleStyle(color: qrColors[qrColorIndex]),
+                eyeStyle: QrEyeStyle(color: qrColors[qrColorIndex]),
                 backgroundColor: qrBackgroundColors[qrBackgroundColorIndex],
                 version: QrVersions.auto,
               ),

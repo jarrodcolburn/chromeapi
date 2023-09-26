@@ -12,5 +12,9 @@
     "permissions": [
         "activeTab"
     ],
-    "manifest_version": 3
+    "manifest_version": 3,
+    "options_ui": {
+        "page": "index.html#options",
+        "open_in_tab": false
+    }
 }
