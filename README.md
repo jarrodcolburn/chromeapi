@@ -12,8 +12,8 @@ Project is WIP, starting with `chrome.tabs` mostly implemented (methods, not eve
     * Examples:
     * `manifest.json` (example: service workers)
     * `index.json`
-  * Customize the build command `flutter build web --web-renderer html --csp`
-For reference on [Building Chrome Extension using Flutter](https://medium.com/flutter-community/building-a-chrome-extension-using-flutter-aeb100a6d6c)
+  * Customize the build command `flutter build web --web-renderer html --csp` (for this project in the `example` directory)
+  * or reference on [Building Chrome Extension using Flutter](https://medium.com/flutter-community/building-a-chrome-extension-using-flutter-aeb100a6d6c)
 
 ## Usage
 
